@@ -1,0 +1,1 @@
+C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\funciones\target\debug\funciones.exe: C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\funciones\src\main.rs

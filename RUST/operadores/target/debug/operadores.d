@@ -1,0 +1,1 @@
+C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\operadores\target\debug\operadores.exe: C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\operadores\src\main.rs

@@ -1,0 +1,1 @@
+C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\structs_tuples\target\debug\structs_tuples.exe: C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\structs_tuples\src\main.rs

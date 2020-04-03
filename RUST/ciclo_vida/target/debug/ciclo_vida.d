@@ -1,0 +1,1 @@
+C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\ciclo_vida\target\debug\ciclo_vida.exe: C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\ciclo_vida\src\main.rs

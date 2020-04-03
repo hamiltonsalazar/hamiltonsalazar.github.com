@@ -1,0 +1,1 @@
+C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\condiciones\target\debug\condiciones.exe: C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\RUST\condiciones\src\main.rs
