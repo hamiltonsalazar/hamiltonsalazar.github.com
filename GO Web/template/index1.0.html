@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Index</title> <!--Index hasta 34.-templates_multiples.go -->
+</head>
+<body>
+	<!--<h1>Hola {{.UserName}}</h1>-->
+	{{ template "header" }}
+	
+	<!-- Condiciones-GO gt -> ">"			and -> &&
+						ge -> ">=" 			or  -> ||
+						lt -> "<"			eq  -> ==
+						le -> "<="			ne  -> !=
+	-->
+	<!--
+	{{if .Activo }}
+		<p>El usuario está activo en la plataforma.</p>
+	{{ else }}
+		<p>El usuario no está activo en la plataforma.</p>
+	{{ end }}
+
+	{{ if (or .Activo .Administrador)}} 
+		<p>Eres administrador</p>
+	{{ end }}
+
+	{{ if (ge .Edad 22)}}  
+		<p>El usuario tiene más de 22 años.</p>
+	{{ end }} 
+	-->
+
+
+	<!-- Ciclos "." dentro de un for hace referencia a cada 				objeto en cada iteración, equivale al 					this. 
+				"range" función para generar los ciclos y recorrer.--> 
+	<!--
+	<p>Tags</p>
+	<ul>
+		{{ range .Tags }}
+			<li> {{ . }} </li>  
+		{{ end }}
+	</ul>
+
+	<p>Cursos</p>
+	<ul>
+		{{ range .Cursos }}
+			<li>
+				El curso: {{ .Nombre }}, con duración de {{ .Duracion }} h.
+			</li>
+		{{ end }}
+	</ul>
+	-->
+
+	<!-- Variables "with" Para declarar variables 
+					La variable debe anteponerse de $
+	-->
+	<!--
+	{{ with $valor := .Edad }}
+		<p>{{ $valor }}</p>
+
+		{{ if ge $valor 22}}
+			<p>Cumple, su edad: {{ $valor }}</p>
+		{{ end }}
+	{{ end }}
+	-->
+
+	<!-- Metodos: Todos los métodos que ejecutemos dentro del template deben retornar algo, para que puedan ser dinámicos, para enviar por párametro solo se pone espacio y a continuación cada párametro-->
+	<!--
+	{{ if .TienePermisoAdministrador "si" }}
+		<p>Es un admiistrador.</p>
+	{{ end }}
+	-->
+
+	<!-- Funciones: Llamar la función sin punto ni nada adicional, para enviar por párametro solo se pone espacio y a continuación cada párametro-->
+	<!--
+	// {{ hola }}
+	<p>El resultado es: {{ suma 4 .Edad }} </p>
+	-->
+
+
+
+
+	<!-- Templates anidados template alojado en este html-->
+	<!--
+	{{ template "footer" }} 
+	{{ template "footer" }}
+	-->
+	
+	<!-- Templates múltiples-->	
+	{{ template "footer" }} 
+	{{ template "nuevo" }}
+
+
+
+</body>
+</html>
