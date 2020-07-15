@@ -32,7 +32,7 @@
 
 h1{
 	font-family: 'Sacramento', cursive;
-	font-size: 3vw;
+	font-size: 2em;
 	text-align: center;
 	font-weight: 900;
 }
@@ -40,13 +40,13 @@ h1{
 h2{
 	font-family: 'Sacramento', cursive;;
 	text-align: left;
-	font-size: 3vw;
+	font-size: 2em;
 }
 
 html{
 	font-family: 'Raleway', sans-serif;
 	text-align: justify;
-	font-size: 2vw;
+	font-size: 1em;
 	color: #3D0108;
 	font-weight: 200;
 }
