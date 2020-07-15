@@ -1,0 +1,14 @@
+{
+    "selector": {
+        "age": {
+            "$lte": 20
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "age",
+        "sex"
+    ],
+    "use_index": "sexM-age"
+}

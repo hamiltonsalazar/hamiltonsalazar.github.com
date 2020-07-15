@@ -1,0 +1,17 @@
+{
+    "selector": {
+        "name": {
+            "$regex": "^Valen"
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "secondName"
+    ],
+    "sort": [
+        {
+            "name": "desc"
+        }
+    ]
+}

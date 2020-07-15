@@ -1,0 +1,22 @@
+{     
+    "selector" : {    
+        "$and": [
+            {
+                "age": {        
+                    "$gte": 25    
+                }
+            },    
+            {
+                "age": {        
+                    "$lte": 30    
+                }
+            } 
+        ]
+    },    
+    "fields": [   "name",   "age",    "_id"     ], 
+    "sort": [
+        {
+            "name": "asc"
+        }   
+    ]
+}

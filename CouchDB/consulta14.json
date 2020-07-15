@@ -1,0 +1,17 @@
+{
+    "selector": {
+        "courses": {
+            "$allMatch": {
+                "completed": true
+            }
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "age",
+        "courses"
+    ],
+    "use_index": "courses.completed:true",
+    "execution_stats": true
+}

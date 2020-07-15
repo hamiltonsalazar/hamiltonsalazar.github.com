@@ -1,0 +1,30 @@
+{
+    "selector": {
+        "courses": {
+            "$elemMatch": {
+                "title": {
+                    "$eq": "javascript-profesional"
+                },
+                "progress": {
+                    "$gte": 50
+                }
+            }
+        },
+        "age": {
+            "$lte": 25
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "age",
+        "sex",
+        "courses"
+    ],
+    "use_index": "courses.title:name-age",
+    "sort": [
+        "name",
+        "age"
+    ],
+    "execution_stats": true
+}

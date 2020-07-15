@@ -1,0 +1,11 @@
+{
+    "selector": {
+        "scores": {
+            "$elemMatch": {
+                "$eq": 8
+            }
+        }
+    },
+    "fields": ["_id", "name", "scores"],
+    "sort": ["scores" ]
+}

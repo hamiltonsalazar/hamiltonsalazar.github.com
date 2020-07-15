@@ -1,0 +1,15 @@
+{
+    "selector": {
+        "name": {
+            "$regex": "en"
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "scores"
+    ],
+    "sort": [
+        "name", "scores"
+    ]
+}

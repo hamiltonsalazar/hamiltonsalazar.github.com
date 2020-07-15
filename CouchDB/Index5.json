@@ -1,0 +1,26 @@
+{
+    "index": {
+        "partial_filter_selector": {
+            "courses": {
+                "$elemMatch": {
+                    "title": {
+                        "$in": [
+                            "javascript-profesional",
+                            "php-profesional",
+                            "mongoose",
+                            "docker-swarm",
+                            "ionic-v4"
+                        ]
+                    }
+                }
+            }
+        },
+        "fields": [
+            "name",
+            "age"
+        ]
+    },
+    "ddoc": "courses.title:name-age",
+    "name": "courses.title:name-age",
+    "type": "json"
+}

@@ -1,0 +1,15 @@
+{
+    "selector": {
+        "name": {
+            "$regex": "el$"
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "secondName"
+    ],
+    "sort": [
+        "name"
+    ]
+}

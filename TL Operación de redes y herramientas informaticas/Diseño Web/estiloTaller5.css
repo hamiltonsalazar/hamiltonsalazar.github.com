@@ -1,0 +1,14 @@
+.title{
+	font-family: 'Modak', cursive;
+	color: #944402;
+	text-align: center;
+	font-size: 1.5em;
+}
+
+.container{
+	background: #C9CBF3;
+	background: -webkit-linear-gradient(to right, #ffffff, #fffc00);  /* Chrome 10-25, Safari 5.1-6 */
+  	background: linear-gradient(to right, #C9CBF3, #fffc00); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	height: 100vh;
+}
+

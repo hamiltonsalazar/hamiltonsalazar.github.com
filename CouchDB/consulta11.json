@@ -1,0 +1,12 @@
+{
+    "selector": {
+        "name": {
+            "$regex": "an"
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "secondName"
+    ]
+}

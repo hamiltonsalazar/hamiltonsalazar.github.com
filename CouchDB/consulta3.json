@@ -1,0 +1,22 @@
+{
+    "selector": {
+        "$and": [
+            {
+                "age": { "$gte": 25 }
+            },
+            {
+                "age": { "$lte": 30 }
+            }
+        ],
+        "$not": {
+            "age": 29
+        }
+    },
+    "fields": [ "_id", "name", "age" ],
+    "sort": [
+        {
+            "age": "desc"
+        }
+    ],
+    "bookmark": "g2wAAAACaAJkAA5zdGFydGtleV9kb2NpZG0AAAAEMTU2M2gCZAAIc3RhcnRrZXlrAAEeag"
+}

@@ -1,0 +1,8 @@
+{    
+    "index": {        
+        "fields": ["name"]    
+    },    
+    "name" : "name-index",    
+    "ddoc" : "name-index",
+    "type" : "json"
+}

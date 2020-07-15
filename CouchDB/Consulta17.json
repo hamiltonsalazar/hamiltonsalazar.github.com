@@ -1,0 +1,13 @@
+{
+    "selector": {
+        "_id": {
+            "$ne": "00"
+        }
+    },
+    "fields": [
+        "_id",
+        "sales"
+    ],
+    "use_index": "_id-sales.fecha",
+    "limit": 1
+}

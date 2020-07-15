@@ -1,0 +1,15 @@
+{
+    "selector": {
+        "courses": {
+            "$elemMatch": {
+                "title": "javascript-profesional"
+            }
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "courses"
+    ], 
+    "sort": [ "courses"]
+}

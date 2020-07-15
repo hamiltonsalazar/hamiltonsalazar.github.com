@@ -1,0 +1,13 @@
+{
+    "index": {
+        "partial_filter_selector": {
+            "sex": "M"
+        },
+        "fields": [
+            "age"
+        ]
+    },
+    "ddoc": "sexM-age",
+    "name": "sexM-age",
+    "type": "json"
+}

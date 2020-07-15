@@ -1,0 +1,21 @@
+{  
+    "selector": {    
+        "age": 29,    
+        "$or": [      
+            {        
+                "name": "Martín"      
+            },      
+            {        
+                "name": "Daniela"      
+            }    
+        ]  
+    },  
+    "fields": [    
+        "name",    "age",    "_id"  
+    ],
+    "sort": [
+        {
+            "age": "asc"
+        }
+    ]
+}

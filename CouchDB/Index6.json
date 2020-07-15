@@ -1,0 +1,15 @@
+{
+    "index": {
+        "partial_filter_selector": {
+            "courses": {
+                "$elemMatch": {
+                    "completed": true
+                }
+            }
+        },
+        "fields": [ ]
+    },
+    "name": "courses.completed:true",
+    "ddoc": "courses.completed:true",
+    "type": "json"
+}

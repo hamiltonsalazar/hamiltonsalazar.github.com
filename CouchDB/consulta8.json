@@ -1,0 +1,15 @@
+{
+    "selector": {
+        "courses": {
+            "$allMatch": {
+                "title": "javascript-profesional"
+            }
+        }
+    },
+    "fields": [
+        "_id",
+        "name",
+        "courses"
+    ],
+    "bookmark": "g1AAAADmeJw1jUEOgjAQRSuBiBuXxksICxcGr-DSA5hJO9hCS5vOYOLtpVRmMfPz_s98K4QodKHEkRgij_h9KS-Ncgsvr113S169eXahu3Xp9ZS6SMGKDVtM6jTAB0hGE_gSou-RjJ_A5li9kHdEInhkcJDeBYuMSomqB0u4_ZvZx1xRZFRO4NaG_VNGYKn_2JppTOKsmQPd25ay3TjDDaq5HdL8ABKbPpg"
+}

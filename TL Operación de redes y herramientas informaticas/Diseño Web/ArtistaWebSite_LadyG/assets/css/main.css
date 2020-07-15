@@ -1,0 +1,117 @@
+@import url('https://fonts.googleapis.com/css2?family=Fondamento:ital@1&family=Raleway:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Fondamento:ital@1&family=Raleway:wght@300&family=Sacramento&display=swap');
+
+.container{
+	background: #9C1006;
+	background: -webkit-linear-gradient(to right, #9C1006, #E34339);  /* Chrome 10-25, Safari 5.1-6 */
+  	background: linear-gradient(to right, #9C1006, #E34339); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */	
+	background-attachment: fixed;
+  	overflow: scroll;  	
+}
+
+.container-image{
+	background: url("../img/Chromatica.png");
+  	background-size: 100%;
+  	background-attachment: fixed;
+	padding: 5vw;
+	background-repeat: no-repeat;
+}
+
+.title{
+	height: 38vw;
+}
+
+.main-image{
+  	width: auto;
+ 	height: 45vw;
+ 	display:block;
+    margin-bottom: 1vw;
+    margin-left: auto;
+  	margin-right: auto;
+}
+
+h1{
+	font-family: 'Sacramento', cursive;
+	text-align: center;
+	font-size: 2em;
+	font-weight: 900;
+}
+
+h2{
+	font-family: 'Sacramento', cursive;;
+	text-align: left;
+	font-size: 2em;
+}
+
+html{
+	font-family: 'Raleway', sans-serif;
+	text-align: justify;
+	font-size: 1em;
+	color: #3D0108;
+}
+
+body{
+}
+
+div.scrollmenu {
+  background-color: #CD4238;
+  overflow: auto;
+  white-space: nowrap;
+}
+
+.albums{
+	width: 20vw;
+}
+
+div.scrollmenu img {
+  display: inline-block;
+  padding: 5px;
+}
+
+div.scrollmenu img:hover {
+  background-color: #9C1006;
+}	
+
+.table{
+	border-collapse: collapse;
+   	width: 100%;
+}
+
+caption{
+	text-align: left;
+	caption-side: bottom;
+	padding: 0.3em;
+	font-size: 1.4vw;
+}
+
+th, td {
+   width: 25%;
+   text-align: left;
+   vertical-align: top;
+   padding: 0.3em;
+}
+
+tr{
+	border-bottom: #A74740 1px solid;
+}
+
+
+th {
+   background: #CD4238;
+}
+
+
+#tableHead{
+	border-collapse: collapse;	
+}
+
+.redes{
+  	width: auto;
+ 	height: 50px;	
+}
+
+
+div.panelRedes img:hover {
+  background-color: #9C1006;
+}	
+

@@ -1,0 +1,8 @@
+{    
+    "index": {        
+        "fields": ["scores"]    
+    },    
+    "name" : "scores-index",    
+    "ddoc" : "scores-index",
+    "type" : "json"
+}

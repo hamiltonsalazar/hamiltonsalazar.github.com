@@ -1,0 +1,18 @@
+{
+    "selector": {
+        "scores": {
+            "$all": [
+                2,
+                6,
+                1,
+                2,
+                3,
+                8,
+                1,
+                0
+              ]
+        }
+    },
+    "fields": [ "_id", "name", "scores" ],
+    "sort": [ "scores" ]
+}
