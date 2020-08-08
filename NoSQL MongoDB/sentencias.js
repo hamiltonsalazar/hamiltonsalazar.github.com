@@ -537,7 +537,7 @@ db.users.find(
     }
 ).pretty()
 
-// Obtener todos los usuarios que hayan reprobado por lo menos una calificación., (>5)
+// Obtener todos los usuarios que hayan reprobado por lo menos una calificación., (<6)
 db.users.find(
     {
         scores: {
@@ -1873,28 +1873,57 @@ db.ColeccionPrueba.find(
 ).pretty().limit(1)
 
 
+db.ColeccionPrueba.find(
+    {
+        _id: "292"
+    },
+    {
+        'sales.products': true
+    }
+).pretty().limit(1)
 
 
 
 // PROJECT:
 
 
-// 5. ¿Cuáles personas tienen un texto específico y un promedio de scores mayor a 7?
+// 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones? 
 
 db.ColeccionPrueba.aggregate(
     [
         {
             $match: {
+                scores: { $exists: true },
+                texts: { $exists: true }
+            }
+        },
+        {
+            $match: {
                 $and: [
                     {
-                        scores: { 
-                            $size: {
-                                $gte: 5
+                        $or: [
+                            {
+                                scores: { $size: 5 }
+                            },
+                            {
+                                scores: { $size: 6 }
+                            },
+                            {
+                                scores: { $size: 7 }
+                            },
+                            {
+                                scores: { $size: 8 }
+                            },
+                            {
+                                scores: { $size: 9 }
+                            },
+                            {
+                                scores: { $size: 10 }
                             }
-                        }
+                        ]
                     },
                     {
-                        texts: /verde valle rodeado de montañas /
+                        texts: /verde valle rodeado de monta/
                     }
                 ]
             }
@@ -1902,7 +1931,11 @@ db.ColeccionPrueba.aggregate(
         {
             $project: {
                 name: true,
-                scores: true
+                secondName: true,
+                lastName: true,
+                secondLastName: true,
+                scores: true,
+                texts: true
             }
         },
         {
@@ -1912,3 +1945,289 @@ db.ColeccionPrueba.aggregate(
         }
     ]
 )
+
+
+db.ColeccionPrueba.find(
+    {
+        $and: [
+            {
+                $or: [
+                    {
+                        scores: { $size: 5 }
+                    },
+                    {
+                        scores: { $size: 6 }
+                    },
+                    {
+                        scores: { $size: 7 }
+                    },
+                    {
+                        scores: { $size: 8 }
+                    },
+                    {
+                        scores: { $size: 9 }
+                    },
+                    {
+                        scores: { $size: 10 }
+                    }
+                ]
+            },
+            {
+                texts: /verde valle rodeado de monta/
+            }
+        ]
+    },
+    {
+        name: true,
+        secondName: true,
+        lastName: true,
+        secondLastName: true,
+        scores: true,
+        texts: true
+    }
+).sort(
+    {
+        _id: 1
+    }
+)
+
+
+
+// 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a X? 
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                scores: { $exists: true },
+                texts: { $exists: true }
+            }
+        },
+        {
+            $project: {
+                name: true,
+                secondName: true,
+                lastName: true,
+                secondLastName: true,
+                scores: true,
+                texts: true
+            }
+        },
+        {
+            $set: {
+                avg: { $avg: '$scores' }
+            }
+        },
+        {
+            $match: {
+                $and: [
+                    {
+                        avg: { $gte: 7 }
+                    },
+                    {
+                        texts: /verde valle rodeado de monta/
+                    }
+                ]
+            }
+        },
+        {
+            $project: {
+                texts: false
+            }
+        },
+        {
+            $sort: {
+                _id: 1
+            }
+        },
+        {
+            $limit: 20
+        }
+    ]
+).pretty()
+
+
+
+// 11. Mostrar la información de los clientes que han comprado más de X veces el producto XYZ. 
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                'sales.products': { $exists: true }
+            }
+        },
+        {
+            $unwind: '$sales'
+        },
+        {
+            $project: {
+                name: true,
+                sales_Products: '$sales.products.name'
+            }
+        },
+        {
+            $unwind: '$sales_Products'
+        },
+        {
+            $group: {
+                _id: {
+                    id: '$_id',
+                    product: '$sales_Products'
+                },
+                total: { $sum: 1 }
+            }
+        },
+        {
+            $match: {
+                total: {
+                    $gt: 40
+                },
+                '_id.product': /Almohadilla/
+            }
+        },
+        {
+            $sort: {
+                '_id.product': 1
+            }
+        }
+    ]
+).pretty()
+
+
+
+// 12. Mostrar la información de la última compra del producto XYZ de un cliente XYZ.
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                _id: "345",
+                sales: { $exists: true }
+            }
+        },
+        {
+            $unwind: '$sales'
+        },
+        {
+            $match: {
+                'sales.products': {
+                    $elemMatch: {
+                        name: /Velita Escarch/
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                sales: true
+            }
+        },
+        {
+            $project: {
+                'sales.products': false
+            }
+        },
+        {
+            $sort: {
+                'sales.date': -1
+            }
+        },
+        {
+            $limit: 1
+        }
+    ]
+).pretty()
+
+
+
+// 8. Agrupar las personas que tenga texts de un tema en especifico
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $unwind: '$texts'
+        },
+        {
+            $group: {
+                _id: {
+                    text: '$texts'
+                },
+                users: {
+                    $addToSet: {
+                        id: "$_id", name: '$name', secondName: "$secondName", lastName: "$lastName", secondLastName: "$secondLastName"
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                _id: false,
+                text: '$_id.text',
+                users: '$users'
+            }
+        },
+        {
+            $sort: {
+                text: 1
+            }
+        }
+    ]
+).pretty()
+
+
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $unwind: '$sales'
+        },
+        {
+            $project: {
+                name: true,
+                sales_Products: '$sales.products.name',
+                date: '$sales.date'
+            }
+        },
+        {
+            $unwind: '$sales_Products'
+        },
+        {
+            $sort: {
+                _id: 1,
+                sales_Products: 1,
+                date: -1
+            }
+        },
+        {
+            $limit: 10
+        }
+    ]
+).pretty()
+
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                name: "Marcos"
+            }
+        },
+        {
+            $project: {
+                name: true,
+                age: true
+            }
+        }
+    ]
+)
+
+db.ColeccionPrueba.find(
+    {
+        name: "Marcos"
+    },
+    {
+        name: true,
+        age: true
+    }
+).explain("executionStats")

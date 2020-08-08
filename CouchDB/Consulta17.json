@@ -1,13 +1,24 @@
 {
     "selector": {
-        "_id": {
-            "$ne": "00"
+        "scores": {
+            "$elemMatch": {
+                "$gte": 7
+            }
+        },
+        "texts": {
+            "$elemMatch": {
+                "$regex": "verde valle rodeado de monta"
+            }
         }
     },
     "fields": [
         "_id",
-        "sales"
+        "name",
+        "secondName",
+        "lastName",
+        "secondLastName",
+        "scores",
+        "texts"
     ],
-    "use_index": "_id-sales.fecha",
-    "limit": 1
+    "execution_stats": true
 }

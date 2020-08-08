@@ -24,15 +24,18 @@
         },
         "texts": {
             "$elemMatch": {
-                "$regex": "verde valle rodeado de montañas"
+                "$regex": "verde valle rodeado de montañas "
             }
         }
     },
     "fields": [
         "_id",
         "name",
+        "secondName",
+        "lastName",
+        "secondLastName",
         "scores",
-        "courses"
+        "texts"
     ],
     "execution_stats": true
 }

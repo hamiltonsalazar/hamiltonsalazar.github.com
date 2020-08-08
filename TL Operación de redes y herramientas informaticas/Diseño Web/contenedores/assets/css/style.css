@@ -1,0 +1,38 @@
+
+#firtsContent{
+	background-color: dodgerblue;
+	width: 50vw;
+	height: 10vh;
+	margin: 20px 50px 60px 50px;
+	padding: 20px;
+	border-color: blue;
+	border: 3px;
+}
+
+#secondContent{
+	width: 30vw;
+	height: 10vh;
+	background-color: tomato;
+	margin: auto;
+	margin-bottom: 20px;
+}
+
+#thirdContent{
+	background-image: url('../img/img1.webp');	
+	width: 50vw;
+	height: 40vh;
+	background-size: 100% auto;
+	background-repeat: no-repeat;
+}
+
+.TipoA{
+	width: 40vw;
+	height: 15vh;
+	background-color: red;
+	margin: 20px;
+}
+
+.TipoA:hover{
+	background-image: url('../img/elmo.jpg');
+	background-size: 100% 100%;
+}

@@ -1,0 +1,18 @@
+body{
+	background: -webkit-linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #F13C26);   /* Safari -7 */
+	background: linear-gradient(45deg, #ee7752, #e73c7e, #23a6d5, #0C0C0C);   /*  Safari 7+  */
+	background-size: 100% 100%;	
+	animation: gradientes 5s ease infinite;
+}
+
+@keyframes gradientes{     /*  Para las animaciones que hizo el ingeniero  */
+	0%{
+		background-position: 0% 50%;
+	}
+	50%{
+		background-position: 100% 50%;
+	}
+	100%{
+		background-position: 0% 50%;
+	}
+}

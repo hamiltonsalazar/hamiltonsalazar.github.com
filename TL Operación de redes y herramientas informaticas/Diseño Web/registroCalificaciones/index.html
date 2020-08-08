@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Registro de calificaciones</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="./assets/css/main.css">
+</head>
+<body>
+
+		<div class="panel" id="panelRegistro">
+			<label>Nombre completo</label>
+			<input type="text" name="fullName" id="fullName" placeholder="Nombres y apellidos">
+			<label>Calificaciones</label>
+			<input class="marks" type="number" name="mark1" id="mark1" placeholder="Calificación 1">
+			<input class="marks" type="number" name="mark2" id="mark2" placeholder="Calificación 2">
+			<input class="marks" type="number" name="mark3" id="mark3" placeholder="Calificación 3">
+			<button onclick="addStudent()">Agregar Estudainte</button>
+		</div>
+
+
+		<div class="panel">
+			<table id="table">
+				<thead>
+					<tr>
+						<th>Estudiante</th>
+						<th>Calificación 1</th>
+						<th>Calificación 2</th>
+						<th>Calificación 3</th>
+						<th>Calificación Final</th>
+						<th>Estado</th>
+					</tr>
+				</thead>					
+				<tbody>
+
+				</tbody>
+			</table>
+
+			<label class="results" id="approved">Estudiantes aprobados: 0</label>
+			<label class="results" id="failed">Estudiantes reprobados: 0</label>
+			<label class="results" id="total">Total de estudiantes: 0</label>
+		</div>
+
+
+	<script type="text/javascript" src="./assets/js/logica.js"></script>
+</body>
+</html>

@@ -1,0 +1,37 @@
+input{
+	width: 100%;
+	padding: 8px 20px;
+	margin: 8px auto;
+}
+
+input[type]{
+	border: 1px solid blue;
+	border-radius: 8px;
+	box-sizing: border-box;
+}
+
+input[type=submit]{	
+	background-color: #4CAF50;
+	color: white;
+	border-radius: 4px;
+	border: none;
+}
+
+#formulario{
+	width: 60%;
+	background-color: lightgray;
+	margin:auto;
+	padding: 3vw;
+	border-radius: 8px;
+}
+
+
+input[type]:hover{
+	background-color: #26E5F1;
+}
+
+#signIn:hover{
+	background-color: #89DA50;
+}
+
+
