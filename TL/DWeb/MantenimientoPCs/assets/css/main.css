@@ -1,0 +1,33 @@
+.carousel-inner img{
+	width: 100%;
+	height: 100%;
+}
+
+.gris-claro{
+	background-color: #ECECEC;
+}
+
+.degradado-verde{
+	background: -moz-linear-gradient(150deg, #97c74e 0%, #2ab9a5 100%);
+	background: -webkit-gradient(linear, left top, right top, color-stop(0%, #97c74e), color-stop(100%, #2ab9a5));
+	background: -webkit-linear-gradient(150deg, #97c74e 0%, #2ab9a5 100%);
+	background: -o-linear-gradient(150deg, #97c74e 0%, #2ab9a5 100%);
+	background: -ms-linear-gradient(150deg, #97c74e 0%, #2ab9a5 100%);
+	background: linear-gradient(150deg, #97c74e 0%, #2ab9a5 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$color-one', endColorstr='$color-two',GradientType=1 );
+}
+
+.iconos a{
+	color: white;
+	margin: 5px;
+
+}
+
+footer{
+	padding-top: 32px;
+	color: white;
+}
+
+section{
+	padding: 50px;
+}
