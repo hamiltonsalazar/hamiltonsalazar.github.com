@@ -24,7 +24,7 @@ var user3 = {
     email: 'hamiltonsalazar@gmail.com'
 }
 
-[var user4 = {
+var user4 = {
     name: 'Alejandro',
     last_name: 'Gutierrez',
     age: 26,
@@ -38,7 +38,7 @@ var user5 = {
     age: 21,
     email: 'hamiltonsalazar@gmail.com'
 }
-]
+
 
 db.users.insertMany(
     [user3, user4]
@@ -51,7 +51,7 @@ db.users.find(
 ).pretty()
 
 // Obtener todos los usaurios cuya edad sea diferente a 23
-// $ne- diferente a 
+// $ne- diferente a
 db.users.find(
     {
         age: {
@@ -60,7 +60,7 @@ db.users.find(
     }
 ).pretty()
 
-// $eq -> igual a 
+// $eq -> igual a
 db.users.find(
     {
         age: {
@@ -376,7 +376,7 @@ db.users.find(
 
 // limit(i)  limita la cantidad de resultados
 db.users.find().limit(2)
-// skip(i) Salta la cantidad indicada 
+// skip(i) Salta la cantidad indicada
 db.users.find().skip(2).limit(1)
 // sort() Ordenar documentos
 db.users.find(
@@ -1284,7 +1284,7 @@ db.users.aggregate(
             $project: {
                 name: true,
                 course: {
-                    $arrayElemAt: ['$firstCourses', 0] // primer parámetro: lista sobre la que se trabajará; segundo parámetro index del elemento a visualizar. 
+                    $arrayElemAt: ['$firstCourses', 0] // primer parámetro: lista sobre la que se trabajará; segundo parámetro index del elemento a visualizar.
                 }
             }
         }
@@ -1887,7 +1887,7 @@ db.ColeccionPrueba.find(
 // PROJECT:
 
 
-// 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones? 
+// 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones?
 
 db.ColeccionPrueba.aggregate(
     [
@@ -1993,7 +1993,7 @@ db.ColeccionPrueba.find(
 
 
 
-// 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a X? 
+// 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a X?
 
 db.ColeccionPrueba.aggregate(
     [
@@ -2048,7 +2048,7 @@ db.ColeccionPrueba.aggregate(
 
 
 
-// 11. Mostrar la información de los clientes que han comprado más de X veces el producto XYZ. 
+// 11. Mostrar la información de los clientes que han comprado más de X veces el producto XYZ.
 
 db.ColeccionPrueba.aggregate(
     [
@@ -2081,7 +2081,7 @@ db.ColeccionPrueba.aggregate(
         {
             $match: {
                 total: {
-                    $gt: 40
+                    $gt: 30
                 },
                 '_id.product': /Almohadilla/
             }
@@ -2164,12 +2164,218 @@ db.ColeccionPrueba.aggregate(
             $project: {
                 _id: false,
                 text: '$_id.text',
-                users: '$users'
+                users: true
             }
         },
         {
             $sort: {
                 text: 1
+            }
+        }
+    ]
+).pretty()
+
+// 6. ¿Cuántas personas mayores a una edad especifica viven en un lugar específico ('address.references' coincide con el texto de búsqueda)?
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                'address.references': { $exists: true },
+                texts: { $exists: true },
+                age: { $gte: 50 }
+            }
+        },
+        {
+            $match: {
+                'address.references': /calle sin pavi/,
+                texts: /en la ciudad de El Cairo un hombre cansado de trabajar para ganarse el pan/
+            }
+        },
+        {
+            $project: {
+                name: true,
+                secondName: true,
+                lastName: true,
+                secondLastName: true,
+                age: true,
+                address: true,
+                texts: true
+            }
+        }
+    ]
+).pretty()
+
+// 9. Agrupar las personas por lugar de vivienda (references) y organizar por el riesgo de edad (De mayor a menor edad)
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                'address.references': { $exists: true }
+            }
+        },
+        {
+            $unwind: '$address.references'
+        },
+        {
+            $project: {
+                name: true,
+                secondName: true,
+                lastName: true,
+                secondLastName: true,
+                age: true,
+                address: true
+            }
+        },
+        {
+            $group: {
+                _id: { reference: '$address.references' },
+                users: {
+                    $addToSet: {
+                        id: "$_id", name: '$name', secondName: "$secondName", lastName: "$lastName", secondLastName: "$secondLastName", age: "$age", address: "$address"
+                    }
+                }
+            }
+        },
+        {
+            $project: {
+                _id: false,
+                reference: '$_id.reference',
+                users: true
+            }
+        },
+        {
+            $project: {
+                'users.address.references': false
+            }
+        }
+    ]
+).pretty()
+
+// 4. ¿Cuál es el texto que más se repite en una misma persona? (Completo toda una posición del [])
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $project: {
+                fullName: {
+                    $concat: ['$name', " ", { $ifNull: ["$secondName", ""] }, ' ', '$lastName', ' ', '$secondLastName']
+                },
+                texts: true
+            }
+        },
+        {
+            $unwind: '$texts'
+        },
+        {
+            $group: {
+                _id: {
+                    "_id": "$_id",
+                    "text": "$texts",
+                    "fullName": '$fullName'
+                },
+                total: { $sum: 1 }
+            }
+        },
+        {
+            $project: {
+                _id: '$_id._id',
+                fullName: "$_id.fullName",
+                text: "$_id.text",
+                total: true
+            }
+        },
+        {
+            $group: {
+                _id: {
+                    "_id": "$_id",
+                    "fullName": "$fullName",
+                    repeticiones: "$total"
+                },
+                texts: {
+                    $addToSet: "$text"
+                }
+            }
+        },
+        {
+            $project: {
+                _id: '$_id._id',
+                fullName: "$_id.fullName",
+                masRepeticiones: {
+                    texts: "$texts",
+                    repeticiones: "$_id.repeticiones"
+                }
+            }
+        },
+        {
+            $sort: {
+                _id: 1, "masRepeticiones.repeticiones": -1
+            }
+        },
+        {
+            $group: {
+                _id: { "_id": "$_id", "fullName": "$fullName" },
+                masRepeticiones: { $first: '$masRepeticiones' }
+            }
+        },
+        {
+            $project: {
+                _id: '$_id._id', fullName: "$_id.fullName", masRepeticiones: true
+            }
+        },
+        {
+            $sort: {
+                _id: 1
+            }
+        }
+    ]
+).pretty()
+
+
+// 10. Fidelización y premiación de clientes: Encontrar las personas con más de 35 años y hayan realizado al menos una compra en la última mitad año con un valor sin IVA mayor a 7.000.000
+
+db.ColeccionPrueba.aggregate(
+    [
+        {
+            $match: {
+                $and: [
+                    {
+                        age: {
+                            $gte: 35
+                        }
+                    },
+                    {
+                        sales: {
+                            $elemMatch: {
+                                $and: [
+                                    {
+                                        date: {
+                                            $gte: ISODate("2020-07-01T00:00:00Z")
+                                        }
+                                    },
+                                    {
+                                        subTotal: {
+                                            $gte: 70000000
+                                        }
+                                    }
+                                ]
+                            }
+                        }
+                    }
+                ]
+            }
+        },
+        {
+            $project: {
+                fullName: {
+                    $concat: ['$name', " ", { $ifNull: ["$secondName", ""] }, ' ', '$lastName', ' ', '$secondLastName']
+                },
+                age: true,
+            }
+        },
+        {
+            $sort: {
+                _id: 1
             }
         }
     ]

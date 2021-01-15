@@ -1,0 +1,40 @@
+{
+    "selector": {
+        "$and": [
+            {
+                "age": {
+                    "$gte": 35
+                }
+            },
+            {
+                "sales":{
+                    "$elemMatch":{
+                        "$and": [
+                            {
+                                "subTotal": {
+                                    "$gte": 70000000
+                                }
+                            },
+                            {
+                                "date": {
+                                    "$gte": "2020-07-01T00:00:00.000Z"
+                                }
+                            }
+                        ]
+                    }
+                }
+            }
+        ]
+    },
+    "fields": [
+        "_id",
+        "name",
+        "secondName",
+        "lastName",
+        "secondLastName",
+        "age"
+    ],
+    "sort": ["_id"],
+    "use_index": "age_subTotal:fidelizacion",
+    "execution_stats": true
+}

@@ -1,0 +1,26 @@
+{
+    "index": {
+        "partial_filter_selector": {
+            "$and": [
+                {
+                    "age": {
+                        "$gte": 35
+                    }
+                },
+                {
+                    "sales":{
+                        "$elemMatch":{
+                            "subTotal": {
+                                "$gte": 70000000
+                            }
+                        }
+                    }
+                }
+            ]
+        },
+        "fields": ["_id"]
+    },
+    "name": "age_subTotal:fidelizacion",
+    "ddoc": "age_subTotal:fidelizacion",
+    "type": "json"
+}

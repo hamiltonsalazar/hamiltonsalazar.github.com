@@ -1,3 +1,6 @@
+// Consulta #8
+// _design/viewTexts/_view/textsGroup
+
 function (doc) {
     if (doc.texts) {
         for (var text in doc.texts) {
@@ -10,22 +13,25 @@ function (doc) {
     }
 }
 
+var results = [];
+
 function (keys, values, rereduce) {
-    var results = [];
     if (rereduce) {
-        if (Array.isArray(values)) {
-            for (indx in values) {
-                if (Array.isArray(values[indx])) {
-                    for (ind in values[indx]) {
-                        if (!results.includes(values[indx][ind])) {
-                            results.push([values[indx][ind], results.includes(values[indx][ind])]);
-                        }
-                    }
-                } 
+        function organizarArray(obj){
+            if (Array.isArray(obj)) {
+                for (ind in obj) {
+                    organizarArray(obj[ind]);
+                }
+            } else{
+                results.push(obj);
             }
-            return results;
         }
+        organizarArray(values);
+        let sinRepetidos = results.filter((valorActual, indiceActual, arreglo) => {
+            return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
+        });
+        return sinRepetidos;
     } else {
-        return values;
+            return values;
     }
 }

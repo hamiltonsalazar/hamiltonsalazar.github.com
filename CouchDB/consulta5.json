@@ -14,5 +14,6 @@
         }
     },
     "fields": [ "_id", "name", "scores" ],
-    "sort": [ "scores" ]
+    "sort": [ "scores" ],
+    "execution_stats": true
 }

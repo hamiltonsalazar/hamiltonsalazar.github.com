@@ -1,15 +1,19 @@
 {
     "selector": {
-        "scores": {
+        "age": { 
+            "$gte": 50
+        },
+        "address.references": {
             "$elemMatch": {
-                "$gte": 7
+                "$regex": "     "
             }
         },
         "texts": {
             "$elemMatch": {
-                "$regex": "verde valle rodeado de monta"
+                "$regex": "en la ciudad de El Cairo un hombre cansado de trabajar para ganarse el pan"
             }
         }
+
     },
     "fields": [
         "_id",
@@ -17,7 +21,9 @@
         "secondName",
         "lastName",
         "secondLastName",
-        "scores"
+        "age",
+        "address",
+        "texts"
     ],
     "execution_stats": true
 }

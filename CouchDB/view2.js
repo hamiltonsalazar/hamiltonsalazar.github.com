@@ -1,3 +1,7 @@
+// Contula #11
+// _design/viewsales/_view/sales_products_count
+// Reduce: _count
+
 function (doc) {
     if (doc.sales) {
         for (var sale in doc.sales) {

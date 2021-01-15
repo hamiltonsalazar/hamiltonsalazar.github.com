@@ -1,6 +1,6 @@
-// Instalación con la documentación y configuración incial
+# Instalación con la documentación y configuración incial
 
-// Obtener infomración del motor
+# Obtener infomración del motor
 curl http://admin:password@127.0.0.1:5984
 
 curl http://epi:1234@127.0.0.1:5984
@@ -24,7 +24,7 @@ curl http://epi:1234@127.0.0.1:5984
 
 
 
- // Crear base de datos
+ # Crear base de datos
  curl -X PUT http://user:pass@127.0.0.1:5984/demo
 
  curl -X PUT http://epi:1234@127.0.0.1:5984/demo
@@ -35,7 +35,7 @@ curl http://epi:1234@127.0.0.1:5984
 
 
 
-// Obtener información de una base de datos
+# Obtener información de una base de datos
 
 curl -X GET http://user:pass@127.0.0.1:5984/demo
 
@@ -56,7 +56,7 @@ curl -X GET http://epi:1234@127.0.0.1:5984/demo
 
 
 
-// Crear un documento simple
+# Crear un documento simple
 curl -H 'Content-Type: application/json' \
             -X POST http://user:pass@127.0.0.1:5984/demo \
             -d '{"company": "Example, Inc."}'
@@ -71,7 +71,7 @@ curl -H "Content-Type: application/json" -X POST http://epi:1234@127.0.0.1:5984/
 
 
 
-// Visualizar un documento específico
+# Visualizar un documento específico
 curl -X GET http://user:pass@127.0.0.1:5984/demo/ObjectId
 
 curl -X GET http://epi:1234@127.0.0.1:5984/demo/8324f5bbc5f7a7531fa074350300001f
@@ -83,7 +83,7 @@ curl -X GET http://epi:1234@127.0.0.1:5984/demo/8324f5bbc5f7a7531fa074350300001f
 
 
 
-// Verificar el usuario y contraseña
+# Verificar el usuario y contraseña
 curl http://admin:password@127.0.0.1:5984/_up
 
 curl http://epi:1234@127.0.0.1:5984/_up
@@ -95,7 +95,7 @@ curl http://epi:1234@127.0.0.1:5984/_up
 
 
 
-// Crear un usuario administrador
+# Crear un usuario administrador
 HOST="http://admin:password@127.0.0.1:5984"
 NODENAME="_local"
 curl -X PUT $HOST/_node/$NODENAME/_config/admins/anna -d '"secret"'
@@ -108,7 +108,7 @@ curl: (3) <url> malformed
 
 
 
-// Verificar el crear bases sin credenciales
+# Verificar el crear bases sin credenciales
 HOST="http://127.0.0.1:5984"
 curl -X PUT $HOST/somedatabase
 
@@ -121,7 +121,7 @@ curl -X PUT http://127.0.0.1:5984/somedatabase
 
 
 
-// Verificar el crear bases con credenciales correctas
+# Verificar el crear bases con credenciales correctas
 HOST="http://anna:secret@127.0.0.1:5984"
 curl -X PUT $HOST/somedatabase
 
@@ -133,7 +133,7 @@ curl -X PUT http://anna:secret@127.0.0.1:5984/somedatabase
 
 
 
-// Solicitud HTTP que parezca que la generó un formulario HTML
+# Solicitud HTTP que parezca que la generó un formulario HTML
 HOST="http://127.0.0.1:5984"
 curl -vX POST $HOST/_session \
        -H 'Content-Type:application/x-www-form-urlencoded' \
@@ -166,7 +166,7 @@ Note: Unnecessary use of -X or --request, POST is already inferred.
 
 
 
-// Crear un nuevo usuario miembro
+# Crear un nuevo usuario miembro
 curl -X PUT http://localhost:5984/_users/org.couchdb.user:jan \
      -H "Accept: application/json" \
      -H "Content-Type: application/json" \
@@ -183,7 +183,7 @@ curl -X PUT http://anna:secret@localhost:5984/_users/org.couchdb.user:jan -H "Ac
 
 
 
-// Iniciar sesión con el usuario crado
+# Iniciar sesión con el usuario crado
 curl -X POST http://localhost:5984/_session -d 'name=jan&password=apple'
 
 curl -X POST http://localhost:5984/_session -d "name=jan&password=apple"
@@ -202,7 +202,7 @@ curl http://jan:apple@127.0.0.1:5984/_up
     "seeds":{}
 }
 
-// En caso de ser incorrecto 
+# En caso de ser incorrecto
 {
     "error":"unauthorized",
     "reason":"Name or password is incorrect."
@@ -211,7 +211,7 @@ curl http://jan:apple@127.0.0.1:5984/_up
 
 
 
-// Cambiar contraseña, primero obtenemos información del usuario
+# Cambiar contraseña, primero obtenemos información del usuario
 curl -X GET http://localhost:5984/_users/org.couchdb.user:jan
 
 curl -X GET http://anna:secret@localhost:5984/_users/org.couchdb.user:jan
@@ -228,7 +228,7 @@ curl -X GET http://anna:secret@localhost:5984/_users/org.couchdb.user:jan
     "salt":"15f8f3099f1f93984c566c74be1a13a8"
 }
 
-// Ahora editamos la información de este
+# Ahora editamos la información de este
 curl -X PUT http://localhost:5984/_users/org.couchdb.user:jan \
      -H "Accept: application/json" \
      -H "Content-Type: application/json" \
@@ -243,7 +243,7 @@ curl -X PUT http://anna:secret@localhost:5984/_users/org.couchdb.user:jan -H "Ac
     "rev":"2-724d8f9af35639db6d96504acda22a25"
 }
 
-// Ahora verificaremos que el cambio se haya efectuado
+# Ahora verificaremos que el cambio se haya efectuado
 
 curl -X POST http://localhost:5984/_session -d "name=jan&password=apple"
 
@@ -259,24 +259,24 @@ curl -X POST http://localhost:5984/_session -d "name=jan&password=orange"
 
 
 
-// Información publica de usuarios
-// Si solicita un documento de un usuario y no es administrador o propietario del documento, CouchDB responderá con:
+# Información publica de usuarios
+# Si solicita un documento de un usuario y no es administrador o propietario del documento, CouchDB responderá con:
 curl http://localhost:5984/_users/org.couchdb.user:robert
 
 {"error":"unauthorized","reason":"You are not authorized to access this db."}
 
-// Si solicita un documento de un usuario que no existe 
+# Si solicita un documento de un usuario que no existe
 curl http://anna:secret@localhost:5984/_users/org.couchdb.user:robert
 
 {"error":"not_found","reason":"missing"}
 
-// set [couchdb] users_db_security_editable = true in local.ini en Windows por alguna razón debemos hacerlo directamente en Fauxton 
-// cambiamos la seguirdad de _users
+# set [couchdb] users_db_security_editable = true in local.ini en Windows por alguna razón debemos hacerlo directamente en Fauxton
+# cambiamos la seguirdad de _users
 curl foo:bar@localhost:15984/_users/_security -XPUT -d '{}'
 
 curl -X PUT http://anna:secret@localhost:5984/_users/_security -d "{}"
 
-// Compartir el campo name como público con el usuario administrador (epi), este le pedirá la contraseña
+# Compartir el campo name como público con el usuario administrador (epi), este le pedirá la contraseña
 curl -X PUT http://localhost:5984/_node/nonode@nohost/_config/couch_httpd_auth/public_fields \
    -H "Content-Type: application/json" \
    -d '"name"' \
@@ -286,7 +286,7 @@ curl -X PUT http://localhost:5984/_node/couchdb@localhost/_config/couch_httpd_au
 
 ""
 
-// Ahora verificamos el usuario
+# Ahora verificamos el usuario
 curl http://localhost:5984/_users/org.couchdb.user:jan
 
 {
@@ -297,8 +297,8 @@ curl http://localhost:5984/_users/org.couchdb.user:jan
 
 
 
-// Authorization (members y admins)
-// Cuando se crea una BD no hay members o admins. Ahora cambiaremos los permisos por defecto, para ello creamos un documento _security el BD
+# Authorization (members y admins)
+# Cuando se crea una BD no hay members o admins. Ahora cambiaremos los permisos por defecto, para ello creamos un documento _security el BD
 curl -X PUT http://localhost:5984/mydatabase/_security \
      -u anna:secret \
      -H "Content-Type: application/json" \
@@ -308,14 +308,14 @@ curl -X PUT http://localhost:5984/demo/_security -u anna:secret -H "Content-Type
 
 {"ok":true}
 
-// Si consultamos la BD estará protegida contra lecturas y escrituras
+# Si consultamos la BD estará protegida contra lecturas y escrituras
 curl http://localhost:5984/mydatabase/
 
 curl http://localhost:5984/demo/
 
 {"error":"unauthorized","reason":"You are not authorized to access this db."}
 
-// Entontonces consultaremos con el usuario jan
+# Entontonces consultaremos con el usuario jan
 
 curl -u jan:apple http://localhost:5984/mydatabase/
 
@@ -347,7 +347,7 @@ curl -u jan:orange http://localhost:5984/demo/
 
 
 
-// Si queremos que "jan" cree documentos  de diseño debemos asignarle un rol de admin a "jan", pero hacerlo usuario por usuario es tedioso, por lo que se recomienda crear un rol de administrador de BD y asignarle ese rol a "jan", sin embargo debemos dejar un members o admind para que la DB no sea pública. 
+# Si queremos que "jan" cree documentos  de diseño debemos asignarle un rol de admin a "jan", pero hacerlo usuario por usuario es tedioso, por lo que se recomienda crear un rol de administrador de BD y asignarle ese rol a "jan", sin embargo debemos dejar un members o admind para que la DB no sea pública.
 curl -X PUT http://localhost:5984/mydatabase/_security \
      -u anna:secret \
      -H "Content-Type: application/json" \
@@ -357,12 +357,12 @@ curl -X PUT http://localhost:5984/demo/_security -u anna:secret -H "Content-Type
 
 {"ok":true}
 
-// Ahora se le asignaremos el rol a Jan, para ello traeremos primero su información
-curl -X GET http://anna:secret@localhost:5984/_users/org.couchdb.user:jan  
+# Ahora se le asignaremos el rol a Jan, para ello traeremos primero su información
+curl -X GET http://anna:secret@localhost:5984/_users/org.couchdb.user:jan
 
 {"_id":"org.couchdb.user:jan","_rev":"4-243a906e8d80be87fce288be0335157c","name":"jan","roles":[],"type":"user","password_scheme":"pbkdf2","iterations":10,"derived_key":"e04b636fcf54253af088ac4eb8073e6db635a2f4","salt":"c6a0391add4b1bcd502ad661c1bfd653"}
 
-// Luego editaremos esto y asignamos el rol
+# Luego editaremos esto y asignamos el rol
 curl -X PUT http://anna:secret@localhost:5984/_users/org.couchdb.user:jan -H "Accept: application/json" -H "Content-Type: application/json" -H "If-Match: 4-243a906e8d80be87fce288be0335157c" -d "{\"name\":\"jan\", \"roles\":[\"demo_admin\"], \"type\":\"user\"}"
 
 {"ok":true,"id":"org.couchdb.user:jan","rev":"5-a18b6133ee7a82d85d2fee6c596808e6"}
@@ -372,7 +372,7 @@ curl -X PUT http://anna:secret@localhost:5984/_users/org.couchdb.user:jan -H "Ac
 
 
 
-// Obtener una vista 
+# Obtener una vista
 /database/_design/designdocname/_view/viewname
 
 curl -X GET http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstView
@@ -400,7 +400,7 @@ curl -X GET http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/fi
 
 
 
-// Obtener un documento de una view debemos usar %20 para representar el espacio en la busqueda.
+# Obtener un documento de una view debemos usar %20 para representar el espacio en la busqueda.
 /blog/_design/docs/_view/by_date?key="2009/01/30 18:04:11"
 
 curl -X GET "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstView?key=\"2009/01/30%2018:04:11\""
@@ -411,7 +411,7 @@ curl -X GET "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/f
 
 
 
-// Obtener documentos en un rango de fechas
+# Obtener documentos en un rango de fechas
 /blog/_design/docs/_view/by_date?startkey="2010/01/01 00:00:00"&endkey="2010/02/00 00:00:00"
 
 curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstView?startkey=\"2010/01/01%2000:00:00\"&endkey=\"2010/02/00%2000:00:00\""
@@ -422,7 +422,7 @@ curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstVie
 
 
 
-// Como los parametros starkey y endkey solo funcionan con rangos debemos cambiar los campos date de String a un arreglo de int: 
+# Como los parametros starkey y endkey solo funcionan con rangos debemos cambiar los campos date de String a un arreglo de int:
 
 {
     "date": "2009/01/31 00:00:00"
@@ -444,7 +444,7 @@ curl -X GET http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/fi
 
 
 
-// Probamos de nuevo con el rango
+# Probamos de nuevo con el rango
 /blog/_design/docs/_view/by_date?startkey=[2010, 1, 1, 0, 0, 0]&endkey=[2010, 2, 1, 0, 0, 0]
 
 curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstView?startkey=\[2009,1,1,0,0,0\]&endkey=\[2009,2,1,0,0,0\]"
@@ -455,7 +455,7 @@ curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstVie
 ]}
 
 
-// Podemos invertir los resultados usando el parametro descending=true
+# Podemos invertir los resultados usando el parametro descending=true
 curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstView?descending=true"
 
 {"total_rows":3,"offset":0,"rows":[
@@ -483,7 +483,7 @@ curl "http://anna:secret@localhost:5984/views/_design/myDesignDoc/_view/firstVie
 
 
 
-// Ejemolo de vista guiado
+# Ejemolo de vista guiado
 curl -X PUT http://localhost:15984/abc
 
 curl -X PUT http://anna:secret@localhost:5984/abc
@@ -559,8 +559,8 @@ curl "http://anna:secret@localhost:5984/abc/_design/docs/_view/by_date?key=\"200
 
 
 
-// 1.3. Databases
-// HEAD /{db}
+# 1.3. Databases
+# HEAD /{db}
 
 HEAD /test HTTP/1.1
 Host: localhost:5984
@@ -580,7 +580,7 @@ X-CouchDB-Body-Time: 0
 
 
 
-// GET /{db}
+# GET /{db}
 
 GET /receipts HTTP/1.1
 Accept: application/json
@@ -637,7 +637,7 @@ Note: Unnecessary use of -X or --request, GET is already inferred.
 
 
 
-// /{db}/_all_docs
+# /{db}/_all_docs
 //GET /{db}/_all_docs
 
 GET /db/_all_docs HTTP/1.1
@@ -678,7 +678,7 @@ curl http://anna:secret@127.0.0.1:5984/views/_all_docs
 
 
 
-// POST /{db}/_all_docs
+# POST /{db}/_all_docs
 
 POST /db/_all_docs HTTP/1.1
 Accept: application/json
@@ -716,8 +716,8 @@ curl -H "Accept: application/json" -H "Content-Type: application/json" -X POST h
 
 
 
-// /{db}/_design_docs
-// GET /{db}/_design_docs
+# /{db}/_design_docs
+# GET /{db}/_design_docs
 
 GET /db/_design_docs HTTP/1.1
 Accept: application/json
@@ -740,7 +740,7 @@ curl http://anna:secret@127.0.0.1:5984/views/_design_docs
 
 
 
-// POST /{db}/_design_docs
+# POST /{db}/_design_docs
 
 POST /db/_all_docs HTTP/1.1
 Accept: application/json
@@ -775,7 +775,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_all_docs -H "Accept: appli
 
 
 
-// POST /{db}/_all_docs/queries
+# POST /{db}/_all_docs/queries
 
 POST /db/_all_docs/queries HTTP/1.1
 Content-Type: application/json
@@ -846,7 +846,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_all_docs/queries -H "Accep
 
 
 
-// POST /{db}/_bulk_get
+# POST /{db}/_bulk_get
 
 POST /db/_bulk_get HTTP/1.1
 Accept: application/json
@@ -892,7 +892,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_get -H "Accept: appli
             ]
         },
         {
-            "id": "bought-a-cat", 
+            "id": "bought-a-cat",
             "docs": [
                 {
                     "ok":{
@@ -907,7 +907,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_get -H "Accept: appli
             ]
         },
         {
-            "id": "4d09da4324f9677d997396179c00b05f", 
+            "id": "4d09da4324f9677d997396179c00b05f",
             "docs": [
                 {
                     "ok":{
@@ -918,7 +918,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_get -H "Accept: appli
             ]
         }
     ]
-}             
+}
 
 POST /db/_bulk_get HTTP/1.1
 Accept: application/json
@@ -937,7 +937,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_get -H "Accept: appli
 {
     "results": [
         {
-            "id": "biking", 
+            "id": "biking",
             "docs": [
                 {
                     "ok":{
@@ -957,7 +957,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_get -H "Accept: appli
 
 
 
-// /{db}/_bulk_docs
+# /{db}/_bulk_docs
 
 POST /db/_bulk_docs HTTP/1.1
 Accept: application/json
@@ -994,7 +994,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_docs -H "Accept: appl
 
 
 
-// Insertar en masa
+# Insertar en masa
 
 POST /source/_bulk_docs HTTP/1.1
 Accept: application/json
@@ -1045,7 +1045,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_docs -H "Accept: appl
 
 
 
-// Actualización de documentos en masa
+# Actualización de documentos en masa
 
 POST /recipes/_bulk_docs HTTP/1.1
 Accept: application/json
@@ -1112,7 +1112,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_bulk_docs -H "Accept: appl
 
 
 
-// /db/_index
+# /db/_index
 
 POST /db/_index HTTP/1.1
 Content-Type: application/json
@@ -1135,8 +1135,8 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_index -H "Content-Type: ap
 }
 
 
-// /db/_find
-// POST /{db}/_find
+# /db/_find
+# POST /{db}/_find
 
 POST /movies/_find HTTP/1.1
 Accept: application/json
@@ -1148,7 +1148,7 @@ Host: localhost:5984
         "year": {"$gt": 2010}
     },
     "fields": ["_id", "_rev", "year", "title"],
-    "sort": [{"year": "asc"}], 
+    "sort": [{"year": "asc"}],
     "limit": 2,
     "skip": 0,
     "execution_stats": true
@@ -1182,7 +1182,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_find -H "Accept: applicati
 curl -X POST http://anna:secret@127.0.0.1:5984/views/_find -H "Accept: application/json" -H "Content-Type: application/json" -d "{    \"selector\": {        \"year\": {\"$gt\": 2010}    },    \"fields\": [\"_id\", \"_rev\", \"year\", \"title\"], \"sort\": [{\"year\": \"desc\"}],      \"limit\": 2,    \"skip\": 0,    \"execution_stats\": true}"
 
 {
-    "docs":[    
+    "docs":[
     {
         "_id":"4d09da4324f9677d997396179c021aae",
         "_rev":"3-6791270dc777bf9f260961858e7b569e",
@@ -1202,7 +1202,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/views/_find -H "Accept: applicati
 
 
 
-// Selector with 2 fields
+# Selector with 2 fields
 
 {
     "name": "Paul",
@@ -1248,7 +1248,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Subfields
+# Subfields
 
 {
     "imdb": {
@@ -1338,8 +1338,8 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Operators
-// The $and operator
+# Operators
+# The $and operator
 
 {
   "selector": {
@@ -1379,11 +1379,11 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// A partir de ahora trabajaré con archivos .json enviados como parametro, almacenados en "C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\CouchDB"
+# A partir de ahora trabajaré con archivos .json enviados como parametro, almacenados en "C:\Users\hamil\OneDrive\Documents\GitHub\hamiltonsalazar.github.com\CouchDB"
 
 
 
-// Indexar por edad
+# Indexar por edad
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content-Type: application/json" -d @Index0.json
 
@@ -1395,7 +1395,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content
 
 
 
-// Indexar por name
+# Indexar por name
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content-Type: application/json" -d @Index00.json
 
@@ -1407,7 +1407,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content
 
 
 
-// The $or operator
+# The $or operator
 
 {
     "year": 1977,
@@ -1433,7 +1433,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Rango a trabajar entre 25 y 30
+# Rango a trabajar entre 25 y 30
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta2.json
 
@@ -1470,7 +1470,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// The $not operator
+# The $not operator
 
 {
     "year": {
@@ -1519,7 +1519,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// El $nor operador
+# El $nor operador
 
 {
     "year": {
@@ -1570,7 +1570,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Indexar por scores
+# Indexar por scores
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content-Type: application/json" -d @Index1.json
 
@@ -1581,7 +1581,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content
 }
 
 
-// The $all operator
+# The $all operator
 
 {
     "_id": {
@@ -1627,7 +1627,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// El $elemMatch operador
+# El $elemMatch operador
 
 {
     "_id": { "$gt": null },
@@ -1673,7 +1673,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Indexar por courses
+# Indexar por courses
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content-Type: application/json" -d @Index2.json
 
@@ -1747,7 +1747,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// The $allMatch operator
+# The $allMatch operator
 
 {
     "_id": { "$gt": null },
@@ -1812,7 +1812,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// like -> expresión regular
+# like -> expresión regular
 
 {
     "selector": {
@@ -1822,8 +1822,8 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Obtener todos los libros cuyo titulo comience con "Valen"
-// WHERE title LIKE 'Valen%'
+# Obtener todos los libros cuyo titulo comience con "Valen"
+# WHERE title LIKE 'Valen%'
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta9.json
 
@@ -1860,12 +1860,12 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Obtener todos los libros cuyo titulo termine con "el"
-// WHERE title LIKE '%el'
+# Obtener todos los libros cuyo titulo termine con "el"
+# WHERE title LIKE '%el'
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta10.json
 
-{   
+{
     "docs":[
     {"_id":"1026","name":"├üngel","secondName":"Iv├ín"},
     {"_id":"1068","name":"├üngel","secondName":"Diego"},
@@ -1898,8 +1898,8 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Obtener todos los libros cuyo titulo posea la palabra "an"
-// WHERE title LIKE '%an%'
+# Obtener todos los libros cuyo titulo posea la palabra "an"
+# WHERE title LIKE '%an%'
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta11.json
 
@@ -1937,8 +1937,8 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// Sintaxis de ordenamiento
-// Indexamos por name y scores al tiempo
+# Sintaxis de ordenamiento
+# Indexamos por name y scores al tiempo
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_index -H "Content-Type: application/json" -d @Index3.json
 
@@ -1987,7 +1987,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// 1.3.7.1. Partial Indexes
+# 1.3.7.1. Partial Indexes
 
 {
   "index": {
@@ -2106,7 +2106,7 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 
 
-// POST /{db}/_explain
+# POST /{db}/_explain
 
 POST /movies/_explain HTTP/1.1
 Accept: application/json
@@ -2233,10 +2233,10 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_explain -H "Accep
 
 
 
-// PROJECT:
+# PROJECT:
 
 
-// 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones?
+# 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones?
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta16.json
 
@@ -2285,32 +2285,46 @@ curl -v http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: appli
 
 curl -X POST http://anna:secret@127.0.0.1:5984/views/_find -H "Accept: application/json" -H "Content-Type: application/json" -d "{    \"selector\": {        \"year\": {\"$gt\": 2010}    },    \"fields\": [\"_id\", \"_rev\", \"year\", \"title\"], \"sort\": [{\"year\": \"asc\"}],      \"limit\": 2,    \"skip\": 0,    \"execution_stats\": true}"
 
+# 4. ¿Cuál es el texto que más se repite en una misma persona? (Completo toda una posición del [])
 
-// 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a 5? 
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup:repeticiones?group=true"
+
+
+# 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a 5?
 
 curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta17.json
 
+# 6. ¿Cuántas personas mayores a una edad especifica viven en un lugar específico ('address.references' coincide con el texto de búsqueda)?
+
+curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta18.json
+
+# 8. Agrupar las personas que tenga texts de un tema en especifico
+
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup?group=true"
+
+# 9. Agrupar las personas por lugar de vivienda (Street o references) y organizar por el riesgo de edad (De mayor a menor edad)
+
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewAddress/_view/address_references:age?group=true"
+
+# 10. Fidelización y premiación de clientes: Encontrar las personas con más de 35 años y hayan realizado al menos una compra en la última mitad año con un valor sin IVA mayor a 7.000.000
+
+curl http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consula19.json
 
 
 
-// 12. Mostrar la información de la última compra del producto XYZ de un cliente XYZ.
+# 11. Mostrar la información de los clientes que han comprado más de diez veces el producto XYZ.
+
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewsales/_view/sales_products_count?group=true&startkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\"\]&endkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\",\{\}\]"
+
+# 12. Mostrar la información de la última compra del producto XYZ de un cliente XYZ.
 
 curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewsales/_view/sales_products_name:date?startkey=\[\"3\",\"Velita%20Escarchada\"\]&endkey=\[\"3\",\{\}\]"
 
 
 
-// 11. Mostrar la información de los clientes que han comprado más de diez veces el producto XYZ. 
-
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewsales/_view/sales_products_count?group=true&startkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\"\]&endkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\",\{\}\]"
-
-
-// 8. Agrupar las personas que tenga texts de un tema en especifico
-
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup?group=true"
 
 
 
-
-// Consulta de prueba
+# Consulta de prueba
 
 curl http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consultaPrueba.json
