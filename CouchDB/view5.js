@@ -1,5 +1,5 @@
 // Consulta #4
-// _design/viewTexts/_view/textGroup:repeticiones
+// _design/viewTexts/_view/textsGroup:repeticiones
 
 function (doc) {
   var results = [];
