@@ -1,5 +1,5 @@
 // Consulta #12
-// _design/viewsales/_view/sales_products_name:date
+// _design/viewSales/_view/sales_products_name:date
 
 function (doc) {
     if (doc.sales) {

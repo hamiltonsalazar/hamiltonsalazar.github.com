@@ -1,0 +1,12 @@
+{
+    "index": {
+        "fields": [
+            "age",
+            "texts",
+            "address.references"
+        ]
+    },    
+    "name" : "age-texts-address.references-index",
+    "ddoc" : "age-texts-address.references-index",
+    "type" : "json"
+}

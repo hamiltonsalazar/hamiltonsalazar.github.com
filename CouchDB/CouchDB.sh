@@ -2238,10 +2238,10 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_explain -H "Accep
 
 # 5. ¿Cuáles personas tienen un texto específico y que tengan entre 5 y 10 calificaciones?
 
-curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consulta16.json
+curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json; charset=utf-8" -d @consulta16.json
 
 
-curl -v http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json; charset=utf-8" -d^
+curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json; charset=utf-8" -d^
 "{^
     \"selector\": {^
         \"scores\": {^
@@ -2268,7 +2268,7 @@ curl -v http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: appli
         },^
         \"texts\": {^
             \"$elemMatch\": {^
-                \"$regex\": \"verde valle rodeado de montaña\"^
+                \"$regex\": \"verde valle rodeado de monta\"^
             }^
         }^
     },^
@@ -2278,16 +2278,15 @@ curl -v http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: appli
         \"secondName\",^
         \"lastName\",^
         \"secondLastName\",^
-        \"scores\"^
+        \"scores\",^
+         \"texts\"^
     ],^
     \"execution_stats\": true^
 }"
 
-curl -X POST http://anna:secret@127.0.0.1:5984/views/_find -H "Accept: application/json" -H "Content-Type: application/json" -d "{    \"selector\": {        \"year\": {\"$gt\": 2010}    },    \"fields\": [\"_id\", \"_rev\", \"year\", \"title\"], \"sort\": [{\"year\": \"asc\"}],      \"limit\": 2,    \"skip\": 0,    \"execution_stats\": true}"
-
 # 4. ¿Cuál es el texto que más se repite en una misma persona? (Completo toda una posición del [])
 
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup:repeticiones?group=true"
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup:repeticiones"
 
 
 # 5. ¿ Cuáles personas tienen un texto específico y que tengan un promedio mayor a 5?
@@ -2300,25 +2299,23 @@ curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: 
 
 # 8. Agrupar las personas que tenga texts de un tema en especifico
 
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup?group=true"
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewTexts/_view/textsGroup:count?group=true"
 
 # 9. Agrupar las personas por lugar de vivienda (Street o references) y organizar por el riesgo de edad (De mayor a menor edad)
 
 curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewAddress/_view/address_references:age?group=true"
 
-# 10. Fidelización y premiación de clientes: Encontrar las personas con más de 35 años y hayan realizado al menos una compra en la última mitad año con un valor sin IVA mayor a 7.000.000
+# 10. Fidelización y premiación de clientes: Encontrar las personas con más de 35 años y hayan realizado al menos una compra en la última mitad año con un valor sin IVA mayor a 550.000.000
 
-curl http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json" -d @consula19.json
-
-
+curl -X POST http://anna:secret@127.0.0.1:5984/pruebaproyecto/_find -H "Accept: application/json" -H "Content-Type: application/json; charset=utf-8" -d @consulta19.json
 
 # 11. Mostrar la información de los clientes que han comprado más de diez veces el producto XYZ.
 
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewsales/_view/sales_products_count?group=true&startkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\"\]&endkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\",\{\}\]"
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewSales/_view/sales_products_count?group=true&startkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\"\]&endkey=\[\"Almohadilla%20Dactilar%20Artline%20X%201%20Unidad%20Huellero%205000%20Imps\",\{\}\]"
 
 # 12. Mostrar la información de la última compra del producto XYZ de un cliente XYZ.
 
-curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewsales/_view/sales_products_name:date?startkey=\[\"3\",\"Velita%20Escarchada\"\]&endkey=\[\"3\",\{\}\]"
+curl "http://anna:secret@localhost:5984/pruebaproyecto/_design/viewSales/_view/sales_products_name:date?startkey=\[\"3\",\"Velita%20Escarchada\"\]&endkey=\[\"3\",\{\}\]"
 
 
 

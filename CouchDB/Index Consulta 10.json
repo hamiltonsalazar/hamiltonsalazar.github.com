@@ -11,7 +11,7 @@
                     "sales":{
                         "$elemMatch":{
                             "subTotal": {
-                                "$gte": 70000000
+                                "$gte": 550000000
                             }
                         }
                     }

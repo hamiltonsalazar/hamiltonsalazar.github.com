@@ -1,5 +1,5 @@
 // Consulta #8
-// _design/viewTexts/_view/textsGroup
+// _design/viewTexts/_view/textsGroup:count
 
 function (doc) {
     if (doc.texts) {
@@ -14,24 +14,24 @@ function (doc) {
 }
 
 var results = [];
+function organizarArray(obj) {
+    if (Array.isArray(obj)) {
+        for (var ind in obj) {
+            organizarArray(obj[ind]);
+        }
+    } else {
+        results.push(obj);
+    }
+}
 
 function (keys, values, rereduce) {
     if (rereduce) {
-        function organizarArray(obj){
-            if (Array.isArray(obj)) {
-                for (ind in obj) {
-                    organizarArray(obj[ind]);
-                }
-            } else{
-                results.push(obj);
-            }
-        }
         organizarArray(values);
         let sinRepetidos = results.filter((valorActual, indiceActual, arreglo) => {
             return arreglo.findIndex(valorDelArreglo => JSON.stringify(valorDelArreglo) === JSON.stringify(valorActual)) === indiceActual
         });
         return sinRepetidos;
     } else {
-            return values;
+        return values;
     }
 }

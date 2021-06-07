@@ -2083,7 +2083,7 @@ db.ColeccionPrueba.aggregate(
                 total: {
                     $gt: 30
                 },
-                '_id.product': /Almohadilla/
+                '_id.product': /Almohadilla Dactilar Artline X 1 Unidad Huellero 5000 Imps/
             }
         },
         {
@@ -2155,7 +2155,11 @@ db.ColeccionPrueba.aggregate(
                 },
                 users: {
                     $addToSet: {
-                        id: "$_id", name: '$name', secondName: "$secondName", lastName: "$lastName", secondLastName: "$secondLastName"
+                        id: "$_id",
+                        name: '$name',
+                        secondName: "$secondName",
+                        lastName: "$lastName",
+                        secondLastName: "$secondLastName"
                     }
                 }
             }

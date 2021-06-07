@@ -28,6 +28,7 @@
             }
         }
     },
+    "use_index": "scores-texts-index",
     "fields": [
         "_id",
         "name",

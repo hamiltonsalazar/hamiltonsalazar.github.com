@@ -1,5 +1,5 @@
 // Contula #11
-// _design/viewsales/_view/sales_products_count
+// _design/viewSales/_view/sales_products_count
 // Reduce: _count
 
 function (doc) {
